@@ -2,11 +2,83 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    {% block title %}
-    {% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    {% if title %}
+        <title> Learning Hub -- {{ title }} </title>
+    {% else %}
+        <title> Learning Hub {{ title }} </title>
+    {% endif %}
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
-{% block content %}
-{% endblock %}
+    <!---- Navigation -->
+    <nav class="nav navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand mr-4"  href="{% url 'blog-home' %}">Learning Hub</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarToggle", aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span></button>
+            <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href="{% url 'blog-home'%}">Home</a>
+                <a class="nav-item nav-link" href="{% url 'blog-home'%}">About</a>
+            </div>
+            <div class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <a class="nav-item nav-link" href="{% url 'blog-home' %}">Profile</a>
+                    <a class="nav-item nav-link" href="{% url 'blog-home' %}">New Post</a>
+                    <a class="nav-item nav-link" href="{% url 'blog-home' %}">Logout</a>
+                {% else %}
+                    <a class="nav-item nav-link" href="{% url 'blog-home' %}">Register</a>
+                    <a class="nav-item nav-link" href="{% url 'blog-home' %}">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <!--- page Header -->
+    <header class="masthead" style="background-image:url('home-bg.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="site-heading">
+                        <h1> Learning Hub Blog </h1>
+                        <span class="subheading">A Blog to learn</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--- Messages--->
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-8">
+                {% if messages %}
+                    {% for message in  messages %}
+                        <div class="alert alert-{{ message.tags }}"> {{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <!--- Content -->
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

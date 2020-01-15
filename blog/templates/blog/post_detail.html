@@ -1,10 +1,8 @@
 {% extends "blog/base.html" %}
-{% block title %}
-<title> Post List </title>
-{% endblock %}
 {% block content %}
-{% for post in object_list %}
-<h1>{{ post.title }} </h1>
-<p>{{ post.description }}</p>
-{% endfor %}
+    {% for post in object_list %}
+        <h1>{{ post.title }} </h1>
+        <small> Posted By: - {{ post.author }} on {{ post.post_created_date }}</small>
+        <p>{{ post.description }}</p>
+    {% endfor %}
 {% endblock %}
