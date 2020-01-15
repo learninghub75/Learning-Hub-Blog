@@ -11,3 +11,13 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
 
 
+    def save(self):
+        super().save()
+
+        img = Image.open(self.image.path)
+        if img.width > 500 or img.height >500:
+            out_size = (300, 300)
+            img.thumbnail(out_size)
+            img.save(self.image.path)
+
+
